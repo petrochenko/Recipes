@@ -9,16 +9,18 @@ export class RecipeService {
 
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'Schnitzel',
       `A schnitzel is meat, usually thinned by pounding with a meat tenderizer,
         that is fried in some kind of oil or fat.`,
-      'http://volshebnaya-eda.ru/wp-content/uploads/2016/05/schnitzel13.jpg',
+      'http://www.kulina.ru/images/docs/Image/znizel1.jpg',
       [
         new Ingredient('Meat', 1),
         new Ingredient('French Fries', 20)
       ]
     ),
     new Recipe(
+      2,
       'Hamburger',
       `A hamburger or burger is a sandwich consisting
         of one or more cooked patties of ground meat, usually
@@ -31,13 +33,26 @@ export class RecipeService {
     )
   ];
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private shoppingListService: ShoppingListService) {
+  }
 
-  getRecipes() {
+  public getRecipes() {
     return this.recipes.slice();
   }
 
-  addIngedientsToShoppingList(ingredients: Ingredient[]) {
+  public getRecipe(id: number): Recipe {
+    let recipe: Recipe;
+
+    for (let rec of this.recipes) {
+      if (id === rec.id) {
+        recipe = rec;
+        break;
+      }
+    }
+    return recipe;
+  }
+
+  public addIngedientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
   }
 }
