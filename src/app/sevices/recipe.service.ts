@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Recipe} from '../models/recipe.model';
 import {Ingredient} from '../models/ingredient.model';
 import {ShoppingListService} from './shopping-list.service';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
+  recipesChanges = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
-      1,
       'Schnitzel',
       `A schnitzel is meat, usually thinned by pounding with a meat tenderizer,
         that is fried in some kind of oil or fat.`,
@@ -19,7 +20,6 @@ export class RecipeService {
       ]
     ),
     new Recipe(
-      2,
       'Hamburger',
       `A hamburger or burger is a sandwich consisting
         of one or more cooked patties of ground meat, usually
@@ -40,15 +40,22 @@ export class RecipeService {
   }
 
   public getRecipe(id: number): Recipe {
-    let recipe: Recipe;
+    return this.recipes[id];
+  }
 
-    for (let rec of this.recipes) {
-      if (id === rec.id) {
-        recipe = rec;
-        break;
-      }
-    }
-    return recipe;
+  public addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipesChanges.next(this.recipes.slice());
+  }
+
+  public updateRecipe(index: number, newRrecipe: Recipe) {
+    this.recipes[index] = newRrecipe;
+    this.recipesChanges.next(this.recipes.slice());
+  }
+
+  public deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipesChanges.next(this.recipes.slice());
   }
 
   public addIngedientsToShoppingList(ingredients: Ingredient[]) {
