@@ -10,7 +10,7 @@ import {AuthGuardService} from '../sevices/auth-guard.service';
 
 const recipesRoutes: Routes = [
   {
-    path: 'recipes',
+    path: '',
     component: RecipesComponent,
     children: [
       {
