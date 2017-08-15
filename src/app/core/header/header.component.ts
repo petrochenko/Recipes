@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Response} from '@angular/http';
-import {DataStorageService} from '../sevices/data-storage.service';
-import {AuthService} from '../sevices/auth.service';
+import {DataStorageService} from '../../sevices/data-storage.service';
+import {AuthService} from '../../sevices/auth.service';
 
 
 @Component({
