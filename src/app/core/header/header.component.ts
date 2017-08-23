@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Response} from '@angular/http';
 import {DataStorageService} from '../../sevices/data-storage.service';
 import {AuthService} from '../../sevices/auth.service';
+// import {HttpEvent} from '@angular/common/http';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HeaderComponent {
     this
       .dataSorageService
       .storeRecipes()
-      .subscribe((response: Response) => {
+      .subscribe((response) => {
           console.log(response);
         },
         (error) => {
